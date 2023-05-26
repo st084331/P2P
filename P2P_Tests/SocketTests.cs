@@ -8,7 +8,7 @@ namespace P2P_Tests
 		[Test]
 		public void ConnectorListenerTest()
 		{
-			var listener = new Listener(5003);
+			var listener = new Listener(58003);
 			var listenerThread = new Thread(() => AcceptConnection(listener));
 			var connectThread = new Thread(() => ConnectToListener(5003));
 			listenerThread.Start();

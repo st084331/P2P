@@ -9,7 +9,7 @@ namespace P2P_Tests
 		[Test]
 		public void ChatCreate()
 		{
-			var chat = new Chat(5005);
+			var chat = new Chat(58005);
 			chat.Dispose();
 		}
 
@@ -18,27 +18,27 @@ namespace P2P_Tests
 		{
 			var messageReceived = 0;
 
-			var chat5000 = new Chat(5000);
-			var chat5001 = new Chat(5001);
-			chat5001.ConnectTo(IPEndPoint.Parse("127.0.0.1:5000"));
+			var chat58000 = new Chat(58000);
+			var chat58001 = new Chat(58001);
+			chat58001.ConnectTo(IPEndPoint.Parse("127.0.0.1:58000"));
 
-			chat5000.OnMessage += _ => messageReceived++;
-			chat5001.OnMessage += _ => messageReceived++;
-
-			Thread.Sleep(100);
-
-			chat5000.Send("A");
+			chat58000.OnMessage += _ => messageReceived++;
+			chat58001.OnMessage += _ => messageReceived++;
 
 			Thread.Sleep(100);
 
-			chat5001.Send("B");
+			chat58000.Send("A");
+
+			Thread.Sleep(100);
+
+			chat58001.Send("B");
 
 			Thread.Sleep(100);
 
 			Assert.That(4, Is.EqualTo(messageReceived));
 
-			chat5000.Dispose();
-			chat5001.Dispose();
+			chat58000.Dispose();
+			chat58001.Dispose();
 		}
 
 		[Test]
@@ -85,7 +85,7 @@ namespace P2P_Tests
 
 			for (var i = 0; i < chatCount; i++)
 			{
-				chats.Add(new Chat(5003 + i));
+				chats.Add(new Chat(58003 + i));
 				Thread.Sleep(100);
 			}
 
@@ -96,7 +96,7 @@ namespace P2P_Tests
 				if (chat == chats.FirstOrDefault())
 					continue;
 
-				chat.ConnectTo(IPEndPoint.Parse("127.0.0.1:5003"));
+				chat.ConnectTo(IPEndPoint.Parse("127.0.0.1:58003"));
 				Thread.Sleep(100);
 			}
 
